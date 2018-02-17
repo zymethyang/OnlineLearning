@@ -1,0 +1,40 @@
+{
+    "users": [
+        {
+            "uid": "BDwG4H7py9ZaRZuTbe7CCt7KlAg1",
+            "teacher": true,
+            "Name": "Nguyen Van A",
+            "course":[1]
+        },
+        {
+            "uid": "",
+            "teacher": false,
+            "Name": "Nguyen Van B",
+            "course":[2,3,4]
+        },
+        {
+            "uid": "",
+            "teacher": false,
+            "Name": "Nguyen Van C",
+            "course":[1,2,4]
+        }
+    ],
+    "course": [
+        {
+            "id": 1,
+            "name":"math"
+        },
+        {
+            "id": 2,
+            "name":"electrical"
+        },
+        {
+            "id": 3,
+            "name":"Micro Controler"
+        },
+        {
+            "id": 4,
+            "name":"Verilog"
+        }
+    ]
+}
