@@ -13,10 +13,14 @@ class HeaderPage extends Component {
 
     componentWillMount() {
         this.props.getCurrentUser();
+        setTimeout(() => {
+            if (this.props.users) {
+                this.props.getDetailUser(this.props.users.uid);
+            }
+        }, 1000)
     }
 
     logout = () => {
-        console.log('logout')
         this.props.logout();
         this.state.users = undefined;
     }
@@ -24,7 +28,7 @@ class HeaderPage extends Component {
     render() {
         return (
             <div className="App">
-                <Header loginForm={this.loginForm} users={this.state.users} logout={this.logout} />
+                <Header loginForm={this.loginForm} users={this.state.users} logout={this.logout} detail={this.state.detail} />
             </div>
         );
     }
@@ -32,7 +36,8 @@ class HeaderPage extends Component {
     componentWillReceiveProps() {
         setTimeout(() => {
             this.setState({
-                users: this.props.users
+                users: this.props.users,
+                detail: this.props.detail
             })
         })
     }
@@ -45,7 +50,8 @@ class HeaderPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        users: state.users
+        users: state.users,
+        detail: state.detail
     }
 }
 
@@ -60,6 +66,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         logout: () => {
             dispatch(act.logout());
+        },
+        getDetailUser: (uid) => {
+            dispatch(act.getDetailUser(uid));
         }
     }
 }

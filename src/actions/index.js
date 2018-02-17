@@ -1,6 +1,7 @@
 import * as Type from '../constants/ActionTypes';
 import * as firebase from "firebase";
 import * as config from '../shared/firebase';
+import callApi from '../utils/callAPI';
 
 firebase.initializeApp(config.config);
 
@@ -51,3 +52,18 @@ export const getCurrentUserDispatch = (data) => {
     }
 }
 
+
+export const getDetailUser = (uid) => {
+    return dispatch => {
+        return callApi(`users?uid=${uid}`, 'GET', null).then(res => {
+            dispatch(dispatchDetailUser(res.data));
+        })
+    }
+}
+
+export const dispatchDetailUser = (data) => {
+    return {
+        type: Type.GET_DETAIL_USER,
+        detail: data
+    }
+}

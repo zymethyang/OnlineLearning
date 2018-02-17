@@ -3,38 +3,48 @@
         {
             "uid": "BDwG4H7py9ZaRZuTbe7CCt7KlAg1",
             "teacher": true,
-            "Name": "Nguyen Van A",
-            "course":[1]
+            "name": "Nguyen Van A",
+            "course": [1],
+            "email": "zymethyang@gmail.com",
+            "img":"https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.0-9/11866377_1607316776186627_2489132443840087401_n.jpg?oh=4adc9825fc6f4c5403a84e5019f3e35a&oe=5B001D41"
         },
         {
             "uid": "",
             "teacher": false,
-            "Name": "Nguyen Van B",
-            "course":[2,3,4]
+            "name": "Nguyen Van B",
+            "course": [
+                2,
+                3,
+                4
+            ]
         },
         {
             "uid": "",
             "teacher": false,
-            "Name": "Nguyen Van C",
-            "course":[1,2,4]
+            "name": "Nguyen Van C",
+            "course": [
+                1,
+                2,
+                4
+            ]
         }
     ],
     "course": [
         {
             "id": 1,
-            "name":"math"
+            "name": "math"
         },
         {
             "id": 2,
-            "name":"electrical"
+            "name": "electrical"
         },
         {
             "id": 3,
-            "name":"Micro Controler"
+            "name": "Micro Controler"
         },
         {
             "id": 4,
-            "name":"Verilog"
+            "name": "Verilog"
         }
     ]
 }
