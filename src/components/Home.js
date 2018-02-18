@@ -3,6 +3,7 @@ import Visitor from './home/Visitor';
 import Student from './home/Student';
 import Teacher from './home/Teacher';
 
+
 class Home extends Component {
     constructor(props) {
         super(props);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Route, NavLink, Link } from 'react-router-dom';
 
 class Home extends Component {
     componentDidMount() {
@@ -21,47 +21,71 @@ class Home extends Component {
                             </li>
                             <li className="collection-item avatar">
                                 <i className="material-icons circle green">home</i>
-                                <span className="title">Homework</span>
+                                <span className="title">Teaching course</span>
                                 <p>
-                                    3 Homework need complete.
+                                    You are teaching {detail.course.length} course.
                                 </p>
                             </li>
-                            <li className="collection-item avatar">
-                                <span className="row">
-                                    <i className="material-icons circle red">insert_chart</i>
-                                </span>
-                                <span className="row">Classroom 1</span>
-                                <span className="row">
-                                    <i className="material-icons">grade</i><i className="material-icons">grade</i><i className="material-icons">grade</i><i className="material-icons">grade</i><i className="material-icons">grade</i>
-                                </span>
-                                <p>Short description about this classroom
-                                </p>
-                            </li>
-
+                            {this.renderCourse(detail.course)}
                         </ul>
 
                     </div>
                     <div className="col l9">
                         <div className="row" style={{ marginTop: 40 }}>
-                            <div className="col l4">
-                                <div className="card">
-                                    <div className="card-image">
-                                        <img src="http://materializecss.com/images/sample-1.jpg" />
-                                        <span className="card-title">This is your class</span>
-                                    </div>
-                                    <div className="card-content">
-                                        <p>News notification</p>
-                                    </div>
-                                    <div className="card-action">
-                                        <a>You need to check assignment</a>
-                                    </div>
-                                </div>
-                            </div>
+                            {this.renderCardCourse(detail.course)}
                         </div>
                     </div>
                 </div>
             </div>
         );
+    }
+    renderCardCourse = (data) => {
+        var result = null;
+        result = data.map((data, index) => {
+            return (
+                <div className="col l4">
+                    <div className="card">
+                        <Link to={`/timeline/${data.id}`}>
+                            <div className="card-image">
+                                <img src={data.img} />
+                                <span className="card-title">{data.name}</span>
+                            </div>
+                            <div className="card-content">
+                                <p>{data.description}</p>
+                            </div>
+                            <div className="card-action">
+                                <a>You need to check assignment</a>
+                            </div>
+                        </Link>
+                    </div>
+                </div>
+            );
+        })
+        return result;
+    }
+    renderCourse = (data) => {
+        console.log(data);
+        var result = null;
+        result = data.map((data, index) => {
+            return (
+                <li className="collection-item avatar" key={index}>
+                    <Link to={`/timeline/${data.id}`}>
+                        <span className="row">
+                            <i className="material-icons circle red">insert_chart</i>
+                        </span>
+                        <span className="row">{data.name}</span>
+                        {/*
+                <span className="row">
+                    <i className="material-icons">grade</i><i className="material-icons">grade</i><i className="material-icons">grade</i><i className="material-icons">grade</i><i className="material-icons">grade</i>
+                </span>
+                */}
+                        <p>Short description about this classroom
+                    </p>
+                    </Link>
+                </li>
+            );
+        })
+        return result;
     }
 }
 

@@ -51,6 +51,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         getDetailUser: (uid) => {
             dispatch(act.getDetailUser(uid));
+        },
+        getCourseByUser: (id) => {
+            dispatch(act.getCourseByUser(id));
         }
     }
 }

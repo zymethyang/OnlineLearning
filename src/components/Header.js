@@ -59,9 +59,17 @@ class Header extends Component {
         this.props.logout();
     }
 
+    addClassroom = () => {
+
+    }
+
+    onSubmitRegistor = (data) => {
+        this.props.onSubmitRegistor(data);
+    }
+
     render() {
-        let detail = this.props.detail || {teacher:false}
-        
+        let detail = this.props.detail || { teacher: false }
+
         return (
             <div>
                 <nav style={{ backgroundImage: 'none', backgroundColor: 'rgba(0,0,0,0.3)', position: 'fixed', top: 0, left: 0, right: 0, zIndex: 10 }}>
@@ -76,13 +84,13 @@ class Header extends Component {
                                 <li onClick={() => this.openRegisterModal()} key={2}><a>Register</a></li>]
 
                             }
-                            {detail.teacher === true ? <li onClick={() => this.openClassroomModal()}><a>Add a classroom</a></li> : <li onClick={() => this.openClassroomModal()}><a>Join a classroom</a></li>}
+                            {detail.teacher === true ? <li onClick={() => this.addClassroom()}><a>Add a classroom</a></li> : <li onClick={() => this.openClassroomModal()}><a>Join a classroom</a></li>}
                         </ul>
                     </div>
                 </nav>
                 <LoginForm loginForm={this.loginForm} />
 
-                <RegisterForm />
+                <RegisterForm onSubmitRegistor={this.onSubmitRegistor} />
                 <ClassroomID />
 
             </div>

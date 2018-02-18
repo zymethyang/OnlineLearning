@@ -4,18 +4,36 @@
             "uid": "BDwG4H7py9ZaRZuTbe7CCt7KlAg1",
             "teacher": true,
             "name": "Nguyen Van A",
-            "course": [1],
+            "course": [
+                {
+                    "id": 1,
+                    "name": "Math",
+                    "description": "This course teach you know about Mathematics",
+                    "img": "http://www.basicknowledge101.com/photos/2016/mathchalkboard.jpg"
+                },
+                {
+                    "id": 2,
+                    "name": "Electrical",
+                    "description": "This course teach you know about Electronic and electricity",
+                    "img": "http://blog.savills.com/_images/electricity-meter.jpg"
+                }
+            ],
             "email": "zymethyang@gmail.com",
-            "img":"https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.0-9/11866377_1607316776186627_2489132443840087401_n.jpg?oh=4adc9825fc6f4c5403a84e5019f3e35a&oe=5B001D41"
+            "img": "https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.0-9/11866377_1607316776186627_2489132443840087401_n.jpg?oh=4adc9825fc6f4c5403a84e5019f3e35a&oe=5B001D41"
         },
         {
             "uid": "",
             "teacher": false,
             "name": "Nguyen Van B",
             "course": [
-                2,
-                3,
-                4
+                {
+                    "id": 1,
+                    "name": "math"
+                },
+                {
+                    "id": 2,
+                    "name": "electrical"
+                }
             ]
         },
         {
@@ -27,24 +45,6 @@
                 2,
                 4
             ]
-        }
-    ],
-    "course": [
-        {
-            "id": 1,
-            "name": "math"
-        },
-        {
-            "id": 2,
-            "name": "electrical"
-        },
-        {
-            "id": 3,
-            "name": "Micro Controler"
-        },
-        {
-            "id": 4,
-            "name": "Verilog"
         }
     ]
 }

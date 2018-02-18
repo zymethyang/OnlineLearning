@@ -33,6 +33,10 @@ class HeaderPage extends Component {
         );
     }
 
+    onSubmitRegistor = (data) => {
+        console.log(data);
+    }
+
     componentWillReceiveProps() {
         setTimeout(() => {
             this.setState({

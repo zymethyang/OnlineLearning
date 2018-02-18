@@ -4,7 +4,13 @@ import * as config from '../shared/firebase';
 import callApi from '../utils/callAPI';
 
 firebase.initializeApp(config.config);
+var database = firebase.database();
 
+export const register = ({ email, password, teacher = false, img, name, course }) => {
+    return dispatch => {
+        
+    }
+}
 
 export const login = ({ email, password }) => {
     return dispatch => {
@@ -65,5 +71,35 @@ export const dispatchDetailUser = (data) => {
     return {
         type: Type.GET_DETAIL_USER,
         detail: data
+    }
+}
+
+export const getCourseByUser = (data) => {
+    return dispatch => {
+        return callApi(`course/${data}`, 'GET', null).then(res => {
+            dispatch(dispatchCourseByUser(res.data));
+        })
+    }
+}
+
+export const dispatchCourseByUser = (data) => {
+    return {
+        type: Type.GET_COURSE_BY_USER,
+        course: data
+    }
+}
+
+export const postCourse = ({ id, name, description, img, uid }) => {
+    return dispatch => {
+        return callApi(`users?uid=${uid}`).then(res => {
+            dispatch(dispatchPostCourse(res.data));
+        })
+    }
+}
+
+export const dispatchPostCourse = (data) => {
+    return {
+        type: Type.ADD_COURSE,
+        data: data
     }
 }

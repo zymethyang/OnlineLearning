@@ -7,7 +7,9 @@ class RegisterForm extends Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            name: '',
+            img: ''
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -30,7 +32,7 @@ class RegisterForm extends Component {
     }
 
     onSubmitRegistor = () => {
-        console.log(this.state);
+        this.props.onSubmitRegistor(this.state);
     }
 
     openRegisterModal = () => {
@@ -39,7 +41,7 @@ class RegisterForm extends Component {
 
     render() {
         return (
-            <div id="register" className="modal" style={{ maxWidth: 550 }}>
+            <div id="register" className="modal" style={{ maxWidth: 500 }}>
                 <div className="modal-content">
                     <div className="row center">
                         <div className="col l8 offset-l2">
@@ -47,27 +49,52 @@ class RegisterForm extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col l10 offset-l1">
-                            <form>
-                                <label>
-                                    Email
+                        <form>
+                            <div className="col l6">
+                                <div className="input-field">
+                                    <i className="material-icons prefix">email</i>
                                     <input
                                         name="email"
                                         type="text"
                                         checked={this.state.email}
                                         onChange={this.handleInputChange} />
-                                </label>
-
-                                <label>
-                                    Password
-                            <input
+                                    <label>Email</label>
+                                </div>
+                            </div>
+                            <div className="col l6">
+                                <div className="input-field">
+                                    <i className="material-icons prefix">vpn_key</i>
+                                    <input
                                         name="password"
                                         type="password"
                                         value={this.state.password}
                                         onChange={this.handleInputChange} />
-                                </label>
-                            </form>
-                        </div>
+                                    <label>Password</label>
+                                </div>
+                            </div>
+                            <div className="col l6">
+                                <div className="input-field">
+                                    <i className="material-icons prefix">account_box</i>
+                                    <input
+                                        name="name"
+                                        type="text"
+                                        value={this.state.name}
+                                        onChange={this.handleInputChange} />
+                                    <label>Your name</label>
+                                </div>
+                            </div>
+                            <div className="col l6">
+                                <div className="input-field">
+                                    <i className="material-icons prefix">account_circle</i>
+                                    <input
+                                        name="img"
+                                        type="text"
+                                        value={this.state.img}
+                                        onChange={this.handleInputChange} />
+                                    <label>Avatar</label>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div className="modal-footer">
