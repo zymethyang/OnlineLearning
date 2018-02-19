@@ -2,13 +2,14 @@ import * as Type from '../constants/ActionTypes';
 import * as firebase from "firebase";
 import * as config from '../shared/firebase';
 import callApi from '../utils/callAPI';
+import syncData from '../utils/syncData';
 
 firebase.initializeApp(config.config);
-var database = firebase.database();
+
 
 export const register = ({ email, password, teacher = false, img, name, course }) => {
     return dispatch => {
-        
+
     }
 }
 
@@ -28,6 +29,21 @@ export const loginDispatch = (data) => {
     }
 }
 
+export const getToken = () => {
+    return dispatch => {
+        var user = firebase.auth().onAuthStateChanged(user => {
+            dispatch(dispatchToken(user.pa));
+        });
+    }
+}
+
+export const dispatchToken = (data) => {
+    return {
+        type: Type.GET_TOKEN,
+        token: data
+    }
+}
+
 export const logout = () => {
     return dispatch => {
         firebase.auth().signOut().then(data => {
@@ -43,25 +59,10 @@ export const logoutDispatch = (data) => {
     }
 }
 
-export const getCurrentUser = () => {
+
+export const getDetailUser = (token) => {
     return dispatch => {
-        var user = firebase.auth().onAuthStateChanged(user => {
-            dispatch(getCurrentUserDispatch(user));
-        });
-    }
-}
-
-export const getCurrentUserDispatch = (data) => {
-    return {
-        type: Type.GET_CURRENT_USER,
-        users: data
-    }
-}
-
-
-export const getDetailUser = (uid) => {
-    return dispatch => {
-        return callApi(`users?uid=${uid}`, 'GET', null).then(res => {
+        return syncData(`user`, 'GET', null, token).then(res => {
             dispatch(dispatchDetailUser(res.data));
         })
     }
@@ -74,9 +75,9 @@ export const dispatchDetailUser = (data) => {
     }
 }
 
-export const getCourseByUser = (data) => {
+export const getCourseByUser = (data, token) => {
     return dispatch => {
-        return callApi(`course/${data}`, 'GET', null).then(res => {
+        return syncData(`course/id`, 'POST', data, token).then(res => {
             dispatch(dispatchCourseByUser(res.data));
         })
     }

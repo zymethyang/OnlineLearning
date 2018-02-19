@@ -8,6 +8,7 @@ const users = (state = initialState, action) => {
                 return state;
             }
         case Type.GET_CURRENT_USER:
+            console.log(action)
             state = action.users;
             return state;
     }

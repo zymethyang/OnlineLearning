@@ -1,26 +1,12 @@
 import React, { Component } from 'react';
-import Header from '../components/Header';
 import * as act from '../actions/index';
 import { connect } from 'react-redux';
 
-class HeaderPage extends Component {
-
-    componentWillMount() {
-
-    }
-
-    logout = () => {
-        this.props.logout();
-    }
-
-    componentWillReceiveProps() {
-    }
-
-
+class SlashScreenPage extends Component {
     render() {
         return (
-            <div className="App">
-                <Header loginForm={this.loginForm} logout={this.logout} detail={this.props.detail} />
+            <div>
+                this is slashscreen page
             </div>
         );
     }
@@ -28,8 +14,11 @@ class HeaderPage extends Component {
 
 
 const mapStateToProps = state => {
+    console.log(state);
     return {
+        users: state.users,
         detail: state.detail,
+        token: state.token
     }
 }
 
@@ -41,8 +30,14 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         logout: () => {
             dispatch(act.logout());
+        },
+        getDetailUser: (token) => {
+            dispatch(act.getDetailUser(token));
+        },
+        getIdToken: () => {
+            dispatch(act.getToken());
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SlashScreenPage);

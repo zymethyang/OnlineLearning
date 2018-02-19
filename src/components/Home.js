@@ -1,35 +1,37 @@
 import React, { Component } from 'react';
-import Visitor from './home/Visitor';
-import Student from './home/Student';
 import Teacher from './home/Teacher';
 
 
 class Home extends Component {
+
+    componentWillMount() {
+        window.$("body").css("background:white");
+    }
+
     constructor(props) {
         super(props);
         this.state = {
             users: undefined,
-            detail: {
-                teacher: false
-            }
+            detail: {},
+            course: [{ _id: null, id: null, name: null, description: null, image: null, startedAt: null, updatedAt: null, __v: 0, document: [], stream: [], member: [] }]
         }
     }
+
     render() {
-        let { users, detail } = this.state;
-        let teacher = detail.teacher || false;
+        let { detail, course } = this.state;
         return (
             <div>
                 <div className="row">
-                    {this.state.users !== undefined && this.state.users !== null ? this.showMenu(teacher, detail) : <Visitor />}
+                    {this.showMenu(detail, course)}
                 </div>
             </div>
         );
     }
 
-    showMenu = (teacher, detail) => {
+    showMenu = (detail, course) => {
         return (
             <div style={{ marginTop: 40 }}>
-                {teacher === true ? <Teacher detail={detail} /> : < Student detail={detail} />}
+                <Teacher detail={detail} course={course} />
             </div>
         );
     }
@@ -37,7 +39,7 @@ class Home extends Component {
     componentWillReceiveProps() {
         setTimeout(() => {
             this.setState({
-                users: this.props.users,
+                course: this.props.course,
                 detail: this.props.detail
             })
         })

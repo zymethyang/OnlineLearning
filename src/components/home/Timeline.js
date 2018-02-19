@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Student extends Component {
+class Timeline extends Component {
     render() {
         let { detail } = this.props;
         return (
@@ -57,4 +57,4 @@ class Student extends Component {
     }
 }
 
-export default Student;
+export default Timeline;

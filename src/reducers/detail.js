@@ -3,7 +3,8 @@ var initialState = { uid: '' };
 const detail = (state = initialState, action) => {
     switch (action.type) {
         case Type.GET_DETAIL_USER:
-            state = action.detail[0];
+        console.log(action);
+            state = action.detail;
             return state;
     }
     return state;

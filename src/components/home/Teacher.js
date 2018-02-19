@@ -7,15 +7,15 @@ class Home extends Component {
         window.$('.button-collapse').sideNav('show');
     }
     render() {
-        let { detail } = this.props;
-        console.log(detail);
+        let { detail, course } = this.props;
+        console.log(detail, course);
         return (
             <div>
                 <div className="row">
                     <div className="col l3" style={{ marginTop: 40 }}>
                         <ul className="collection">
                             <li className="collection-item avatar">
-                                <img src={detail.img} alt="teacher icon" className="circle" />
+                                <img src={detail.image} alt="teacher icon" className="circle" />
                                 <span className="title">{detail.name}</span>
                                 <p>{detail.email}</p>
                             </li>
@@ -23,16 +23,16 @@ class Home extends Component {
                                 <i className="material-icons circle green">home</i>
                                 <span className="title">Teaching course</span>
                                 <p>
-                                    You are teaching {detail.course.length} course.
+                                    You are teaching {course.length} course.
                                 </p>
                             </li>
-                            {this.renderCourse(detail.course)}
+                            {this.renderCourse(course)}
                         </ul>
 
                     </div>
                     <div className="col l9">
                         <div className="row" style={{ marginTop: 40 }}>
-                            {this.renderCardCourse(detail.course)}
+                            {this.renderCardCourse(course)}
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ class Home extends Component {
                     <div className="card">
                         <Link to={`/timeline/${data.id}`}>
                             <div className="card-image">
-                                <img src={data.img} />
+                                <img src={data.image} />
                                 <span className="card-title">{data.name}</span>
                             </div>
                             <div className="card-content">
