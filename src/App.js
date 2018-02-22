@@ -27,7 +27,7 @@ class App extends Component {
               <HeaderPage />
               <Switch>
                 <Route path='/' exact component={HomePage} />
-                <Route path="/timeline/:slug" component={TimelinePage} />>
+                <Route path="/timeline/:id" component={TimelinePage} />>
                 </Switch>
               <FooterPage />
             </div>

@@ -1,5 +1,6 @@
 import React, { Component, View } from 'react';
 import ClassroomID from './header/classroomID';
+import AddClassroom from './header/addClassroom';
 
 class Header extends Component {
 
@@ -13,18 +14,25 @@ class Header extends Component {
         window.$('#classroom').modal('open');
     }
 
+    addClassroom = () => {
+        window.$('#moreClassroom').modal('open');
+    }
+
 
     logout = (data) => {
         this.props.logout();
     }
 
-    addClassroom = () => {
+    submitSendId = (id) => {
+        this.props.submitSendId(id);
+    }
 
+    onSubmitClassroom = (data) => {
+        this.props.onSubmitClassroom(data);
     }
 
     render() {
         let detail = this.props.detail;
-        console.log(detail);
         return (
             <div>
                 <nav style={{ backgroundImage: 'none', backgroundColor: 'rgba(0,0,0,0.3)', position: 'fixed', top: 0, left: 0, right: 0, zIndex: 10 }}>
@@ -41,7 +49,8 @@ class Header extends Component {
                         </ul>
                     </div>
                 </nav>
-                <ClassroomID />
+                <ClassroomID submitSendId={this.submitSendId} />
+                <AddClassroom onSubmitClassroom={this.onSubmitClassroom} />
             </div>
         );
     }

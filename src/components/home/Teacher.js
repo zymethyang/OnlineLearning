@@ -8,7 +8,7 @@ class Home extends Component {
     }
     render() {
         let { detail, course } = this.props;
-        console.log(detail, course);
+
         return (
             <div>
                 <div className="row">
@@ -28,7 +28,6 @@ class Home extends Component {
                             </li>
                             {this.renderCourse(course)}
                         </ul>
-
                     </div>
                     <div className="col l9">
                         <div className="row" style={{ marginTop: 40 }}>
@@ -43,7 +42,7 @@ class Home extends Component {
         var result = null;
         result = data.map((data, index) => {
             return (
-                <div className="col l4">
+                <div className="col l4" key={index}>
                     <div className="card">
                         <Link to={`/timeline/${data.id}`}>
                             <div className="card-image">
@@ -54,7 +53,7 @@ class Home extends Component {
                                 <p>{data.description}</p>
                             </div>
                             <div className="card-action">
-                                <a>You need to check assignment</a>
+                                <h5>You need to check assignment</h5>
                             </div>
                         </Link>
                     </div>
@@ -64,7 +63,6 @@ class Home extends Component {
         return result;
     }
     renderCourse = (data) => {
-        console.log(data);
         var result = null;
         result = data.map((data, index) => {
             return (

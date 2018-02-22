@@ -90,9 +90,10 @@ export const dispatchCourseByUser = (data) => {
     }
 }
 
-export const postCourse = ({ id, name, description, img, uid }) => {
+export const postCourse = (data, token) => {
     return dispatch => {
-        return callApi(`users?uid=${uid}`).then(res => {
+        return syncData(`course`, 'POST', data, token).then(res => {
+            console.log(res);
             dispatch(dispatchPostCourse(res.data));
         })
     }

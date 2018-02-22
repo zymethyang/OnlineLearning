@@ -1,64 +1,64 @@
 import React, { Component } from 'react';
-
+import { Route, NavLink, Link } from 'react-router-dom';
 class Timeline extends Component {
     render() {
-        var { match } = this.props;
-        var name = match.params.slug;
+        let { detail, course } = this.props;
+        console.log(detail, course);
         return (
-            <div class="container">
-                <div class="timeline">
-                    <div class="timeline-event">
-                        <div class="card timeline-content">
-                            <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" src="http://img11.hostingpics.net/pics/681702481.jpg" />
-                            </div>
-                            <div class="card-content">
-                                <span class="card-title activator grey-text text-darken-4">Tile<i class="material-icons right">more_vert</i></span>
-                                <p>Content <a href="#">This is a link</a></p>
-                            </div>
-                            <div class="card-reveal">
-                                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                                <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-badge blue white-text"><i class="material-icons">language</i></div>
-                    </div>
-                    <div class="timeline-event">
-                        <div class="card timeline-content">
-                            <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" src="http://img11.hostingpics.net/pics/949190532.jpg" />
-                            </div>
-                            <div class="card-content">
-                                <span class="card-title activator grey-text text-darken-4">Tile<i class="material-icons right">more_vert</i></span>
-                                <p>Content <a href="#">This is a link</a></p>
-                            </div>
-                            <div class="card-reveal">
-                                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                                <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-badge red white-text"><i class="material-icons">work</i></div>
-                    </div>
-                    <div class="timeline-event">
-                        <div class="card timeline-content">
-                            <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" src="http://img11.hostingpics.net/pics/512562623.jpg" />
-                            </div>
-                            <div class="card-content">
-                                <span class="card-title activator grey-text text-darken-4">Tile<i class="material-icons right">more_vert</i></span>
-                                <p>Content <a href="#">This is a link</a></p>
-                            </div>
-                            <div class="card-reveal">
-                                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                                <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-badge green white-text"><i class="material-icons">person</i></div>
-                    </div>
+            <div className="row">
+                <div className="col l3" style={{ marginTop: 80 }}>
+                    <ul className="collection">
+                        <li className="collection-item avatar">
+                            <img src={detail.image} alt="teacher icon" className="circle" />
+                            <span className="title">{detail.name}</span>
+                            <p>{detail.email}</p>
+                        </li>
+                        <li className="collection-item avatar">
+                            <i className="material-icons circle green">home</i>
+                            <span className="title">Teaching course</span>
+                            <p>
+                                You are teaching {course.length} course.
+                                </p>
+                        </li>
+                        {this.renderCourse(course)}
+                    </ul>
+                </div>
+                <div className="col l9" style={{ marginTop: 80 }}>
+                   
                 </div>
             </div>
+
         );
     }
+
+
+    renderCourse = (data) => {
+        var result = null;
+        result = data.map((data, index) => {
+            return (
+                <li className="collection-item avatar" key={index}>
+                    <Link to={`/timeline/${data.id}`}>
+                        <span className="row">
+                            <i className="material-icons circle red">insert_chart</i>
+                        </span>
+                        <span className="row">{data.name}</span>
+                        {/*
+                <span className="row">
+                    <i className="material-icons">grade</i><i className="material-icons">grade</i><i className="material-icons">grade</i><i className="material-icons">grade</i><i className="material-icons">grade</i>
+                </span>
+                */}
+                        <p>Short description about this classroom
+                    </p>
+                    </Link>
+                </li>
+            );
+        })
+        return result;
+    }
+
+
+
 }
+
 
 export default Timeline;

@@ -6,8 +6,7 @@ class roomID extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            password: ''
+            id: ''
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -23,14 +22,8 @@ class roomID extends Component {
     }
 
 
-    componentWillMount() {
-        window.$(document).ready(function () {
-            window.$('.modal').modal();
-        });
-    }
-
-    openClassroomModal = () => {
-        window.$('#classroom').modal('open');
+    onSubmitSendId = () => {
+        this.props.submitSendId(this.state);
     }
 
     render() {
@@ -43,7 +36,7 @@ class roomID extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col l10 offset-l1">
+                        <div className="col l12">
                             <form>
                                 <label>
                                     Classroom ID
@@ -58,7 +51,7 @@ class roomID extends Component {
                     </div>
                 </div>
                 <div className="modal-footer">
-                    <a className="modal-action modal-close waves-effect waves-green btn-flat" onClick={() => this.onSubmitRegistor()}>Submit</a>
+                    <a className="modal-action modal-close waves-effect waves-green btn-flat" onClick={() => this.onSubmitSendId()}>Submit</a>
                 </div>
             </div>
         );

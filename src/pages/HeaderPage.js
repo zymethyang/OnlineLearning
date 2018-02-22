@@ -13,23 +13,29 @@ class HeaderPage extends Component {
         this.props.logout();
     }
 
-    componentWillReceiveProps() {
-    }
-
-
     render() {
         return (
             <div className="App">
-                <Header loginForm={this.loginForm} logout={this.logout} detail={this.props.detail} />
+                <Header loginForm={this.loginForm} logout={this.logout} detail={this.props.detail} submitSendId={this.submitSendId} onSubmitClassroom={this.onSubmitClassroom} />
             </div>
         );
     }
+
+    submitSendId = (data) => {
+        console.log(data);
+    }
+
+    onSubmitClassroom = data => {
+        this.props.postCource(data, this.props.token);
+    }
+
 }
 
 
 const mapStateToProps = state => {
     return {
         detail: state.detail,
+        token: state.token
     }
 }
 
@@ -41,6 +47,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         logout: () => {
             dispatch(act.logout());
+        },
+        postCource: (data, token) => {
+            dispatch(act.postCourse(data, token))
         }
     }
 }
