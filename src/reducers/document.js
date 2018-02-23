@@ -18,13 +18,13 @@ var initialState = [
 
 
 
-const course = (state = initialState, action) => {
+const document = (state = initialState, action) => {
     switch (action.type) {
-        case Type.GET_COURSE_BY_USER:
-            state = action.course;
+        case Type.GET_COURSE_WITH_ID:
+            state = action.document;
             return state;
     }
     return state;
 }
 
-export default course;
+export default document;

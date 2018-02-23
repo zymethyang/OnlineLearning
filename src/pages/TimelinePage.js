@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 
 class TimelinePage extends Component {
     render() {
-        var { match } = this.props;
-        var id = match.params.id;
+
 
         return (
             <div>
@@ -14,11 +13,19 @@ class TimelinePage extends Component {
             </div>
         );
     }
+
+    componentWillReceiveProps() {
+        var { match } = this.props;
+        var id = match.params.id;
+        var data = [id];
+        this.props.getCourseWithID(data, this.props.token);
+    }
 }
 
 
 const mapStateToProps = state => {
     return {
+        token: state.token,
         detail: state.detail,
         course: state.course
     }
@@ -26,6 +33,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
+        getCourseWithID: (id, token) => {
+            dispatch(act.getCourseWithID(id, token));
+        }
     }
 }
 

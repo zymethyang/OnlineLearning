@@ -1,6 +1,7 @@
 import React, { Component, View } from 'react';
 import ClassroomID from './header/classroomID';
 import AddClassroom from './header/addClassroom';
+import AddDocument from './header/addDocument';
 
 class Header extends Component {
 
@@ -18,6 +19,9 @@ class Header extends Component {
         window.$('#moreClassroom').modal('open');
     }
 
+    openAddDocument = () => {
+        window.$('#document').modal('open');
+    }
 
     logout = (data) => {
         this.props.logout();
@@ -29,6 +33,10 @@ class Header extends Component {
 
     onSubmitClassroom = (data) => {
         this.props.onSubmitClassroom(data);
+    }
+
+    dataDocument = (document) => {
+        this.props.dataDocument(document);
     }
 
     render() {
@@ -46,11 +54,13 @@ class Header extends Component {
                             }
                             <li onClick={() => this.addClassroom()}><a>Add a classroom</a></li>
                             <li onClick={() => this.openClassroomModal()}><a>Join a classroom</a></li>
+                            <li onClick={() => this.openAddDocument()}><a>Add document</a></li>
                         </ul>
                     </div>
                 </nav>
                 <ClassroomID submitSendId={this.submitSendId} />
                 <AddClassroom onSubmitClassroom={this.onSubmitClassroom} />
+                <AddDocument dataDocument={this.dataDocument} />
             </div>
         );
     }

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Route, NavLink, Link } from 'react-router-dom';
+import * as act from '../actions/index';
+import { connect } from 'react-redux';
+
 class Timeline extends Component {
     render() {
-        let { detail, course } = this.props;
-        console.log(detail, course);
+        let { detail, course, document } = this.props;
+        console.log(document)
         return (
             <div className="row">
                 <div className="col l3" style={{ marginTop: 80 }}>
@@ -23,12 +26,47 @@ class Timeline extends Component {
                         {this.renderCourse(course)}
                     </ul>
                 </div>
-                <div className="col l9" style={{ marginTop: 80 }}>
-                   
-                </div>
+                {this.renderDocument(document)}
+
+
             </div>
 
         );
+    }
+
+    renderDocument = (document) => {
+        var result = null;
+        if (document.document) {
+            result = document.document.map(doc => {
+                console.log(doc);
+                return (
+                    <div className="col l4" style={{ marginTop: 80 }}>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="http://materializecss.com/images/sample-1.jpg" />
+                                <span class="card-title">{doc.title}</span>
+                                <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">send</i></a>
+                            </div>
+                            <div class="card-content">
+
+                                <span class="row">
+                                    <span class="col l3">
+                                        <img src="http://materializecss.com/images/sample-1.jpg" width="100%" height="100%" style={{ borderRadius: 75 }} />
+                                    </span>
+                                    <h6>Tri Nguyen</h6>
+                                    <p>Nội dung rất hay và bổ ích.</p>
+                                </span>
+
+                                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                <label for="textarea1">Để lại bình luận</label>
+                            </div>
+                        </div>
+                    </div>
+                );
+            })
+        }
+
+        return result;
     }
 
 
@@ -60,5 +98,14 @@ class Timeline extends Component {
 
 }
 
+const mapStateToProps = state => {
+    return {
+        token: state.token,
+        detail: state.detail,
+        course: state.course,
+        document: state.document
+    }
+}
 
-export default Timeline;
+
+export default connect(mapStateToProps, null)(Timeline);

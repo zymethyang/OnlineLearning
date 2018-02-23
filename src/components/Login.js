@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import LoginForm from './login/LoginForm';
 import RegisterForm from './login/RegisterForm';
-//import './login/index.css';
+import './login/index.css';
 
 
 class Login extends Component {

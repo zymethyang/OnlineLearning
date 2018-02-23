@@ -1,11 +1,7 @@
 import * as Type from '../constants/ActionTypes';
-import * as firebase from "firebase";
-import * as config from '../shared/firebase';
 import callApi from '../utils/callAPI';
 import syncData from '../utils/syncData';
-
-firebase.initializeApp(config.config);
-
+const firebase = require('../shared/firebase');
 
 export const register = ({ email, password, teacher = false, img, name, course }) => {
     return dispatch => {
@@ -75,10 +71,34 @@ export const dispatchDetailUser = (data) => {
     }
 }
 
+const exportImage = (url) => {
+    return new Promise((resolve, reject) => {
+        var storageRef = firebase.storage().ref(url);
+        storageRef.getDownloadURL().then(link => {
+            resolve(link);
+        })
+    })
+}
+
 export const getCourseByUser = (data, token) => {
     return dispatch => {
         return syncData(`course/id`, 'POST', data, token).then(res => {
-            dispatch(dispatchCourseByUser(res.data));
+
+            var promise = new Promise((resolve, reject) => {
+                res.data.map(course => {
+                    exportImage(course.image).then(image => {
+                        course.image = image
+                    })
+                    return course
+                })
+                resolve(true);
+            })
+
+            promise.then(() => {
+                setTimeout(() => {
+                    dispatch(dispatchCourseByUser(res.data));
+                }, 1000)
+            })
         })
     }
 }
@@ -93,7 +113,6 @@ export const dispatchCourseByUser = (data) => {
 export const postCourse = (data, token) => {
     return dispatch => {
         return syncData(`course`, 'POST', data, token).then(res => {
-            console.log(res);
             dispatch(dispatchPostCourse(res.data));
         })
     }
@@ -103,5 +122,53 @@ export const dispatchPostCourse = (data) => {
     return {
         type: Type.ADD_COURSE,
         data: data
+    }
+}
+
+export const postDocument = (data, token) => {
+    return dispatch => {
+        return syncData(`course/add/document`, 'POST', data, token).then(res => {
+            dispatch(disptachDocument(res.data));
+        })
+    }
+}
+
+export const disptachDocument = (data) => {
+    return {
+        type: Type.ADD_DOCUMENT,
+        data: data
+    }
+}
+
+
+
+export const getCourseWithID = (data, token) => {
+    return dispatch => {
+        return syncData(`course/id`, 'POST', data, token).then(res => {
+            if (res.data[0]) {
+                var promise = new Promise((resolve, reject) => {
+                    res.data[0].document.map(doc => {
+                        exportImage(doc.link).then(link => {
+                            doc.link = link
+                        })
+                        return doc;
+                    })
+                    resolve(true);
+                })
+
+                promise.then(() => {
+                    setTimeout(() => {
+                        dispatch(dispatchCourseWithID(res.data[0]));
+                    }, 1000)
+                })
+            }
+        })
+    }
+}
+
+export const dispatchCourseWithID = (data) => {
+    return {
+        type: Type.GET_COURSE_WITH_ID,
+        document: data
     }
 }

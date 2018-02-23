@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Route, NavLink, Link } from 'react-router-dom';
+const firebase = require('../../shared/firebase');
 
 class Home extends Component {
+    
     componentDidMount() {
         window.$(".button-collapse").sideNav();
         window.$('.button-collapse').sideNav('show');
     }
     render() {
         let { detail, course } = this.props;
-
         return (
             <div>
                 <div className="row">
@@ -38,6 +39,7 @@ class Home extends Component {
             </div>
         );
     }
+
     renderCardCourse = (data) => {
         var result = null;
         result = data.map((data, index) => {
@@ -72,11 +74,6 @@ class Home extends Component {
                             <i className="material-icons circle red">insert_chart</i>
                         </span>
                         <span className="row">{data.name}</span>
-                        {/*
-                <span className="row">
-                    <i className="material-icons">grade</i><i className="material-icons">grade</i><i className="material-icons">grade</i><i className="material-icons">grade</i><i className="material-icons">grade</i>
-                </span>
-                */}
                         <p>Short description about this classroom
                     </p>
                     </Link>

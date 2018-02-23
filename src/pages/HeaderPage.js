@@ -16,9 +16,13 @@ class HeaderPage extends Component {
     render() {
         return (
             <div className="App">
-                <Header loginForm={this.loginForm} logout={this.logout} detail={this.props.detail} submitSendId={this.submitSendId} onSubmitClassroom={this.onSubmitClassroom} />
+                <Header loginForm={this.loginForm} logout={this.logout} detail={this.props.detail} submitSendId={this.submitSendId} onSubmitClassroom={this.onSubmitClassroom} dataDocument={this.dataDocument} />
             </div>
         );
+    }
+
+    dataDocument = (document) => {
+        this.props.postDocument(document,this.props.token);
     }
 
     submitSendId = (data) => {
@@ -50,6 +54,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         postCource: (data, token) => {
             dispatch(act.postCourse(data, token))
+        },
+        postDocument: (data, token) => {
+            dispatch(act.postDocument(data, token))
         }
     }
 }
